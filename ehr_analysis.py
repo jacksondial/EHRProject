@@ -26,11 +26,7 @@ def parse_data(filename: str) -> dict[str, list[str]]:
     return my_dict  # O(1)
 
 
-# patientdat = parse_data("C:/Users/jacks/BIOSTAT821/EHRProject/Patient.txt")
-# labdat = parse_data("C:/Users/jacks/BIOSTAT821/EHRProject/Labs.txt")
-
-
-def num_older_than(age: float, patient_dict: dict) -> int:
+def num_older_than(age: float, patient_dict: dict[str, list[str]]) -> int:
     """
     Parse data and count the number of patients older than given age.
     We assume the patient's date of birth is the third column.
@@ -49,9 +45,11 @@ def num_older_than(age: float, patient_dict: dict) -> int:
     return count_older  # O(1)
 
 
-def sick_patients(lab: str, gl: str, value: float, lab_dict: dict) -> list:
+def sick_patients(
+    lab: str, gl: str, value: float, lab_dict: dict[str, list[str]]
+) -> list[str]:
     """
-    Parse data and return the patient ID's of any with a test value above     .
+    Parse data and return the patient ID's of any with a test value above
     or below a given value for a given test measurement.
     This function operates in time as follows:
     1 + 1 + 1 + N(1 + N(1+1+1+1)) + 1 + 1 + 1 + 1= N(1+4N) + 4 = N + 4N^2 = N^2
@@ -70,4 +68,6 @@ def sick_patients(lab: str, gl: str, value: float, lab_dict: dict) -> list:
                 elif gl == "<":  # O(1)
                     if float(test[i + num_words]) < value:  # O(1)
                         patient_list[key] = key  # O(1)
+                else:
+                    raise ValueError(f"Unexpected character: {gl}")
     return list(patient_list.keys())  # O(1)
