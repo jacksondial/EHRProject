@@ -20,3 +20,8 @@ def test_sick_patients():
     """Test the sick_patients function."""
     assert sick_patients("wbc count", ">", 1, parse_data("test1.txt")) == ["23456"]
     assert sick_patients("rbc count", "<", 24, parse_data("test1.txt")) == ["12345"]
+
+
+def first_age():
+    """Test the first_age function."""
+    assert first_age("12345", parse_data("test2.txt"), parse_data("test1.txt")) == 15
