@@ -8,7 +8,7 @@
 
 2. For Contributors:
     **Testing**
-    To test the _ehr analysis_ python file using the _pytest_ library, use the following code:
+    To test the _ehr analysis_ python file using the _pytest_ library, use the following code in your terminal, where the test file and file to be tested are located:
     
 ````
 pytest test_ehr_analysis.py
