@@ -69,5 +69,27 @@ def sick_patients(
                     if float(test[i + num_words]) < value:  # O(1)
                         patient_list[key] = key  # O(1)
                 else:
-                    raise ValueError(f"Unexpected character: {gl}")
+            raise ValueError(f"Unexpected character: {gl}")
     return list(patient_list.keys())  # O(1)
+
+
+def first_age(
+    patient_id: str, patient_dict: dict[str, list[str]], lab_dict: dict[str, list[str]]
+) -> int:
+    """
+    Compute the age of given patient at first admission.
+    It is assumed that the first recorded lab record for a patient is their
+    first in the file. We also assume the date is in the format of
+    YYYY-MM-DD. The date item for the patient file is assumed
+    to be the second in the list that is the items in a dictionary,
+    and the date item for the labs file is assumed to be the second
+    from the last item
+    """
+    patient_dob = patient_dict.get(patient_id)[1]
+    visit_day = lab_dict.get(patient_id)[-2]
+    dob_year, dob_month, dob_day = patient_dob.split("-")
+    ad_year, ad_month, ad_day = visit_day.split("-")
+    age_at_admission = date(int(ad_year), int(ad_month), int(ad_day)) - date(
+        int(dob_year), int(dob_month), int(dob_day)
+    )
+    return int(age_at_admission.days / 365.25)
