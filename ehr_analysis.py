@@ -20,7 +20,7 @@ def parse_data(filename: str) -> dict[str, list[str]]:
     file = open(filename)  # O(1)
     next(file)  # O(1)
     for line in file:  # O (N)
-        items = line.split()  # O(1)
+        items = line.split("\t")  # O(1)
         key, values = items[0], items[1:]  # O (1)
         my_dict.setdefault(key, []).extend(values)  # O(1)
     return my_dict  # O(1)
@@ -38,7 +38,8 @@ def num_older_than(age: float, patient_dict: dict[str, list[str]]) -> int:
     age_in_days = age * 365.25  # O(1)
     today = date.today()  # O(1)
     for values in patient_dict.values():  # O(N)
-        year, month, day = values[1].split("-")  # O(3)
+        just_date = values[1].split()[0]
+        year, month, day = just_date.split("-")  # O(3)
         patient_age = today - date(int(year), int(month), int(day))  # O(3)
         if patient_age.days > age_in_days:  # O(1)
             count_older += 1  # O(1)
@@ -73,6 +74,28 @@ def sick_patients(
     return list(patient_list.keys())  # O(1)
 
 
+def sick_patients2(
+    lab_name: str, gl: str, value: float, lab_dict: dict[str, list[str]]
+) -> list:
+    patient_list = []
+    for key, values in lab_dict.items():
+        test = list(values)
+        # print(test)
+        if test[1] == lab_name:
+            if gl == "<":
+                if float(test[2]) < value:
+                    patient_list.append(key)
+            elif gl == ">":
+                if float(test[2]) > value:
+                    patient_list.append(key)
+            else:
+                raise ValueError(f"Unexpected character: {gl}")
+    return patient_list
+
+
+print(sick_patients2("METABOLIC: GLUCOSE", ">", 1, parse_data("lab_test.txt")))
+
+
 def first_age(
     patient_id: str, patient_dict: dict[str, list[str]], lab_dict: dict[str, list[str]]
 ) -> int:
@@ -86,10 +109,22 @@ def first_age(
     from the last item
     """
     patient_dob = patient_dict.get(patient_id)[1]
-    visit_day = lab_dict.get(patient_id)[-2]
-    dob_year, dob_month, dob_day = patient_dob.split("-")
-    ad_year, ad_month, ad_day = visit_day.split("-")
+    patient_dob2 = patient_dob.split()[0]
+    visit_day = lab_dict.get(patient_id)[4]
+    visit_day2 = visit_day.split()[0]
+
+    dob_year, dob_month, dob_day = patient_dob2.split("-")
+    ad_year, ad_month, ad_day = visit_day2.split("-")
     age_at_admission = date(int(ad_year), int(ad_month), int(ad_day)) - date(
         int(dob_year), int(dob_month), int(dob_day)
     )
     return int(age_at_admission.days / 365.25)
+
+
+# print(
+#     first_age(
+#         "1A8791E3-A61C-455A-8DEE-763EB90C9B2C",
+#         parse_data("patient_test.txt"),
+#         parse_data("lab_test.txt"),
+#     )
+# )
