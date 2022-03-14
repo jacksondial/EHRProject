@@ -52,9 +52,6 @@ def sick_patients(
     """
     Parse data and return the patient ID's of any with a test value above
     or below a given value for a given test measurement.
-    This function operates in time as follows:
-    1 + 1 + 1 + N(1 + N(1+1+1+1)) + 1 + 1 + 1 + 1= N(1+4N) + 4 = N + 4N^2 = N^2
-    O(N^2)
     """
     patient_list = dict()  # O(1)
     lab_name = lab.split()  # O(1)
@@ -93,9 +90,6 @@ def sick_patients2(
     return patient_list
 
 
-print(sick_patients2("METABOLIC: GLUCOSE", ">", 1, parse_data("lab_test.txt")))
-
-
 def first_age(
     patient_id: str, patient_dict: dict[str, list[str]], lab_dict: dict[str, list[str]]
 ) -> int:
@@ -119,12 +113,3 @@ def first_age(
         int(dob_year), int(dob_month), int(dob_day)
     )
     return int(age_at_admission.days / 365.25)
-
-
-# print(
-#     first_age(
-#         "1A8791E3-A61C-455A-8DEE-763EB90C9B2C",
-#         parse_data("patient_test.txt"),
-#         parse_data("lab_test.txt"),
-#     )
-# )
