@@ -1,4 +1,0 @@
-PatientID	PatientGender	PatientDateOfBirth	PatientRace	PatientMaritalStatus	PatientLanguage	PatientPopulationPercentageBelowPoverty
-FB2ABB23-C9D0-4D09-8464-49BF0B982F0F	Male	1999-04-20 02:45:40.547	Unknown	Married	Icelandic	18.08
-64182B95-EB72-4E2B-BE77-8050B71498CE	Male	1997-12-01 19:51:12.917	African American	Separated	English	13.03
-DB22A4D9-7E4D-485C-916A-9CD1386507FB	Female	1995-04-02 13:04:20.717	Asian	Married	English	6.67

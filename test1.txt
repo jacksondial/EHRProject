@@ -1,4 +1,0 @@
-subjid   admissionid   labname   labvalue   units   datetime
-12345   67890   rbc count   23   mg   09MAR2021
-23456   78901   wbc count   2   mL   20APR1999
-34567   89012   wt   49   kg   30SEP1993
