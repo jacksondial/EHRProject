@@ -1,8 +1,6 @@
 """Test EHR_SQLite.py."""
 
 from ehr_SQLite import (
-    parse_patients,
-    parse_labs,
     num_older_than,
     sick_patients,
     first_age,
