@@ -67,7 +67,7 @@ def sick_patients(
                     if float(test[i + num_words]) < value:  # O(1)
                         patient_list[key] = key  # O(1)
                 else:
-            raise ValueError(f"Unexpected character: {gl}")
+                    raise ValueError(f"Unexpected character: {gl}")
     return list(patient_list.keys())  # O(1)
 
 
