@@ -38,7 +38,7 @@ parse_patients("patient_test.txt")
 
 con.commit()
 
-test = cur.execute("SELECT * FROM patient")
+# test = cur.execute("SELECT * FROM patient")
 
 # for row in test:
 #     print(row)
@@ -116,7 +116,7 @@ def num_older_than(age: float) -> list[tuple[int, int]]:
     return test
 
 
-print(num_older_than(25.0))
+# print(num_older_than(25.0))
 
 
 def first_age(patient_test: str) -> int:
@@ -136,6 +136,6 @@ def first_age(patient_test: str) -> int:
     return age
 
 
-first_age("1A8791E3-A61C-455A-8DEE-763EB90C9B2C")
+# first_age("1A8791E3-A61C-455A-8DEE-763EB90C9B2C")
 
 # con.close()
