@@ -18,7 +18,7 @@ def test_num_older_than():
     assert num_older_than(30, parse_patients("patient_test.txt")) == 0
 
 
-def test_sick_patients():
+def test_sick_patients2():
     """Test the sick_patients function."""
     assert sick_patients("METABOLIC: GLUCOSE", ">", 1, parse_labs("lab_test.txt")) == [
         "1A8791E3-A61C-455A-8DEE-763EB90C9B2C"
