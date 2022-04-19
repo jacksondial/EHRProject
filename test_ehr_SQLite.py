@@ -7,10 +7,6 @@ from ehr_SQLite import (
 )
 
 
-def parse_patients():
-    """Test parse_patients function."""
-
-
 def test_num_older_than():
     """Test the num_older_than function."""
     assert num_older_than(23) == 5

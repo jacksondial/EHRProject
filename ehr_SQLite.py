@@ -2,29 +2,30 @@
 import sqlite3
 import os
 
-os.remove("ehr.db")
+if os.path.exists("ehr.db"):
+    os.remove("ehr.db")
 
 con = sqlite3.connect("ehr.db")
 
 cur = con.cursor()
 
-cur.execute(
-    """
-    CREATE TABLE patient(
-        [patient_id] TEXT PRIMARY KEY,
-        [patient_gender] TEXT,
-        [patient_dob] TEXT,
-        [patient_race] TEXT,
-        [patient_marital] TEXT,
-        [patient_language] TEXT,
-        [patient_pop_below_pov] FLOAT
-    )
-    """
-)
-
 
 def parse_patients(patient_file: str):
-    """Insert patients into patient table."""
+    """build patient table and insert patients into patient table."""
+    cur.execute(
+        """
+        CREATE TABLE patient(
+            [patient_id] TEXT PRIMARY KEY,
+            [patient_gender] TEXT,
+            [patient_dob] TEXT,
+            [patient_race] TEXT,
+            [patient_marital] TEXT,
+            [patient_language] TEXT,
+            [patient_pop_below_pov] FLOAT
+        )
+        """
+    )
+
     pat_file = open(patient_file)
     next(pat_file)
     for line in pat_file:
@@ -42,23 +43,23 @@ test = cur.execute("SELECT * FROM patient")
 # for row in test:
 #     print(row)
 
-cur.execute(
-    """
-    CREATE TABLE lab(
-        [patient_id] TEXT NOT NULL,
-        [admission_id] INTEGER NOT NULL,
-        [lab_name] TEXT,
-        [lab_value] FLOAT,
-        [lab_units] TEXT,
-        [lab_date_time] TEXT,
-        CONSTRAINT PK_lab PRIMARY KEY (patient_id, admission_id)
-    )
-    """
-)
-
 
 def parse_labs(given_lab: str):
     """Insert labs into lab table."""
+    cur.execute(
+        """
+        CREATE TABLE lab(
+            [patient_id] TEXT NOT NULL,
+            [admission_id] INTEGER NOT NULL,
+            [lab_name] TEXT,
+            [lab_value] FLOAT,
+            [lab_units] TEXT,
+            [lab_date_time] TEXT,
+            CONSTRAINT PK_lab PRIMARY KEY (patient_id, admission_id)
+        )
+        """
+    )
+
     lab_file = open(given_lab)
     next(lab_file)
     for line in lab_file:
@@ -95,12 +96,12 @@ def sick_patients(given_name: str, gl: str, given_value: float) -> list[str]:
     return patient_list
 
 
-print(sick_patients("CBC: MCH", ">", 3.0))
+# print(sick_patients("CBC: MCH", ">", 3.0))
 
 # num_older_than
 
 
-def num_older_than(age: float) -> list[tuple]:
+def num_older_than(age: float) -> list[tuple[int, int]]:
     """Find number of patients older than a given age."""
     age_iterable = [age]
     older = cur.execute(
