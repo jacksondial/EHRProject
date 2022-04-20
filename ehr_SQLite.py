@@ -34,7 +34,7 @@ def parse_patients(patient_file: str):
         cur.execute("INSERT INTO patient VALUES(?, ?, ?, ?, ?, ?, ?)", data)
 
 
-parse_patients("patient_test.txt")
+# parse_patients("patient_test.txt")
 
 con.commit()
 
@@ -68,7 +68,7 @@ def parse_labs(given_lab: str):
         cur.execute("INSERT INTO lab VALUES(?, ?, ?, ?, ?, ?)", data)
 
 
-parse_labs("lab_test.txt")
+# parse_labs("lab_test.txt")
 
 con.commit()
 
