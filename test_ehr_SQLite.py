@@ -15,7 +15,7 @@ if os.path.exists("ehr.db"):
     os.remove("ehr.db")
 
 con = sqlite3.connect("ehr.db")
-
+cur = con.cursor()
 
 parse_patients("patient_test.txt")
 parse_labs("lab_test.txt")

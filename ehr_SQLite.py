@@ -6,14 +6,13 @@ if os.path.exists("ehr.db"):
     os.remove("ehr.db")
 
 # con = sqlite3.connect("ehr.db")
+con = sqlite3.connect("ehr.db")
 
 # cur = con.cursor()
 
 
 def parse_patients(patient_file: str):
     """build patient table and insert patients into patient table."""
-    con = sqlite3.connect("ehr.db")
-
     cur = con.cursor()
 
     cur.execute(
@@ -50,7 +49,6 @@ def parse_patients(patient_file: str):
 
 def parse_labs(given_lab: str):
     """Insert labs into lab table."""
-    con = sqlite3.connect("ehr.db")
 
     cur = con.cursor()
 
@@ -89,7 +87,6 @@ def parse_labs(given_lab: str):
 
 def sick_patients(given_name: str, gl: str, given_value: float) -> list[str]:
     """Give ID numbers for patients that are 'sick'."""
-    con = sqlite3.connect("ehr.db")
 
     cur = con.cursor()
 
@@ -115,7 +112,6 @@ def sick_patients(given_name: str, gl: str, given_value: float) -> list[str]:
 
 def num_older_than(age: float) -> int:
     """Find number of patients older than a given age."""
-    con = sqlite3.connect("ehr.db")
 
     cur = con.cursor()
 
@@ -137,8 +133,6 @@ def num_older_than(age: float) -> int:
 
 def first_age(patient_test: str) -> int:
     """Compute age at first admisison for a given patient."""
-    con = sqlite3.connect("ehr.db")
-
     cur = con.cursor()
 
     patient_list = [patient_test]
