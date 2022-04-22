@@ -11,8 +11,8 @@ from ehr_SQLite import (
 import sqlite3
 import os
 
-if os.path.exists("ehr.db"):
-    os.remove("ehr.db")
+# if os.path.exists("ehr.db"):
+#     os.remove("ehr.db")
 
 con = sqlite3.connect("ehr.db")
 cur = con.cursor()
@@ -23,7 +23,7 @@ parse_labs("lab_test.txt")
 
 def test_num_older_than():
     """Test the num_older_than function."""
-    assert num_older_than(23) == 5
+    assert num_older_than(23) == 6
     assert num_older_than(25) == 4
     assert num_older_than(30) == 0
 
