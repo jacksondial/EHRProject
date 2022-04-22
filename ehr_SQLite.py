@@ -5,13 +5,17 @@ import os
 if os.path.exists("ehr.db"):
     os.remove("ehr.db")
 
-con = sqlite3.connect("ehr.db")
+# con = sqlite3.connect("ehr.db")
 
-cur = con.cursor()
+# cur = con.cursor()
 
 
 def parse_patients(patient_file: str):
     """build patient table and insert patients into patient table."""
+    con = sqlite3.connect("ehr.db")
+
+    cur = con.cursor()
+
     cur.execute(
         """
         CREATE TABLE patient(
@@ -36,7 +40,7 @@ def parse_patients(patient_file: str):
 
 # parse_patients("patient_test.txt")
 
-con.commit()
+# con.commit()
 
 # test = cur.execute("SELECT * FROM patient")
 
@@ -46,6 +50,10 @@ con.commit()
 
 def parse_labs(given_lab: str):
     """Insert labs into lab table."""
+    con = sqlite3.connect("ehr.db")
+
+    cur = con.cursor()
+
     cur.execute(
         """
         CREATE TABLE lab(
@@ -70,7 +78,7 @@ def parse_labs(given_lab: str):
 
 # parse_labs("lab_test.txt")
 
-con.commit()
+# con.commit()
 
 # test_lab = cur.execute("SELECT * FROM lab")
 # for row in test_lab:
@@ -81,6 +89,10 @@ con.commit()
 
 def sick_patients(given_name: str, gl: str, given_value: float) -> list[str]:
     """Give ID numbers for patients that are 'sick'."""
+    con = sqlite3.connect("ehr.db")
+
+    cur = con.cursor()
+
     inputs = [given_value, given_name]
     sick = cur.execute(
         f"""
@@ -101,8 +113,12 @@ def sick_patients(given_name: str, gl: str, given_value: float) -> list[str]:
 # num_older_than
 
 
-def num_older_than(age: float) -> list[tuple[int, int]]:
+def num_older_than(age: float) -> int:
     """Find number of patients older than a given age."""
+    con = sqlite3.connect("ehr.db")
+
+    cur = con.cursor()
+
     age_iterable = [age]
     older = cur.execute(
         """
@@ -121,6 +137,10 @@ def num_older_than(age: float) -> list[tuple[int, int]]:
 
 def first_age(patient_test: str) -> int:
     """Compute age at first admisison for a given patient."""
+    con = sqlite3.connect("ehr.db")
+
+    cur = con.cursor()
+
     patient_list = [patient_test]
     age_cur = cur.execute(
         """
@@ -137,5 +157,3 @@ def first_age(patient_test: str) -> int:
 
 
 # first_age("1A8791E3-A61C-455A-8DEE-763EB90C9B2C")
-
-# con.close()

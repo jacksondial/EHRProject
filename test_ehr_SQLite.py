@@ -1,10 +1,24 @@
 """Test EHR_SQLite.py."""
 
 from ehr_SQLite import (
+    parse_patients,
+    parse_labs,
     num_older_than,
     sick_patients,
     first_age,
 )
+
+import sqlite3
+import os
+
+if os.path.exists("ehr.db"):
+    os.remove("ehr.db")
+
+con = sqlite3.connect("ehr.db")
+
+
+parse_patients("patient_test.txt")
+parse_labs("lab_test.txt")
 
 
 def test_num_older_than():
